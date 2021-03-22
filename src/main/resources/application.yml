@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: Eszett
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/eszett_db
+    username: eszett
+    password: eszett01
