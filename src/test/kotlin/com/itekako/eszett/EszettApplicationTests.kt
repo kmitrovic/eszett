@@ -9,9 +9,6 @@ import kotlin.test.assertNotNull
 @SpringBootTest
 class EszettApplicationTests(@Autowired val controller: RestController) {
 
-	@Autowired
-
-
 	@Test
 	fun `context loads`() = assertNotNull(controller)
 
