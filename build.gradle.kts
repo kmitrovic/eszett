@@ -48,10 +48,10 @@ tasks.withType<Test> {
 }
 
 tasks.test {
-	outputs.dir(snippetsDir)
+	outputs.dir("snippets")
 }
 
 tasks.asciidoctor {
-	inputs.dir(snippetsDir)
-	dependsOn(test)
+	inputs.dir("snippets")
+	dependsOn(tasks.test)
 }
