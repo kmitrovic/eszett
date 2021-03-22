@@ -14,5 +14,7 @@ CREATE TABLE employee (
   surname VARCHAR NOT NULL,
   email VARCHAR NOT NULL,
   salary NUMERIC NOT NULL,
-  address VARCHAR DEFAULT ''
+  address VARCHAR DEFAULT '',
+  company BIGINT NOT NULL,
+  FOREIGN KEY (company) REFERENCES company (id)
 );
