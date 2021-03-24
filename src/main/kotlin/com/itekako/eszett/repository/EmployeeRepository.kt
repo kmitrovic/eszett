@@ -9,5 +9,5 @@ import org.springframework.data.rest.core.annotation.RestResource
 interface EmployeeRepository : PagingAndSortingRepository<Employee, Long> {
 
     @RestResource(exported = false)
-    fun findByUsername(username: String): Employee
+    fun findByUsername(username: String): Employee?
 }
