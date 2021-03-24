@@ -21,5 +21,5 @@ class Company(@SequenceGenerator(name = "company_id_seq", sequenceName = "compan
               var employees: MutableSet<Employee> = HashSet()) {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    fun getAvgSalary(): Double = employees.asSequence().map { it.salary }.average()
+    fun getAvgSalary() = employees.asSequence().map { it.salary }.average()
 }
