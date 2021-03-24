@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.*
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
 
@@ -30,7 +31,7 @@ data class Employee(@SequenceGenerator(name = "employee_id_seq", sequenceName = 
                     val email: String = "",
 
                     @Column(nullable = false)
-                    @get: NotBlank(message="{salary.required}")
+                    @get: NotNull(message="{salary.required}")
                     val salary: Double,
 
                     @Column(length = 500)
@@ -43,7 +44,7 @@ data class Employee(@SequenceGenerator(name = "employee_id_seq", sequenceName = 
                     val username: String? = null,
 
                     @Column(length = 60)
-                    @get: Size(min=60, max=60, message="{password.incorrect}")
+                    @get: Size(min=6, max=10, message="{password.size}")
                     @JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
                     val password: String? = null,
 
