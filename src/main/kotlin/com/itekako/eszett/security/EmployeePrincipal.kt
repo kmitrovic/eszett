@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 class EmployeePrincipal(private val employee: Employee) : UserDetails {
+    fun getCompanyId() = employee.company.id
 
     override fun getUsername() = employee.username?: ""
     override fun getPassword() = employee.password?: ""

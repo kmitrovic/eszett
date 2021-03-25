@@ -55,4 +55,4 @@ class Employee(@SequenceGenerator(name = "employee_id_seq", sequenceName = "empl
 
                @ManyToOne(optional = false)
                @JoinColumn(name = "company_id", nullable = false)
-               val company: Company? = null)
+               val company: Company)
