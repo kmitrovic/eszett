@@ -1,6 +1,5 @@
 package com.itekako.eszett.security
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl
@@ -12,7 +11,7 @@ import org.springframework.security.web.access.expression.DefaultWebSecurityExpr
 import org.springframework.context.support.beans
 
 @Configuration
-class Config(@Suppress("UNUSED_PARAMETER") @Autowired employeeDetailsService: EmployeeDetailsService)
+class Config(@Suppress("UNUSED_PARAMETER") private val employeeDetailsService: EmployeeDetailsService)
         : WebSecurityConfigurerAdapter() {
 
 
