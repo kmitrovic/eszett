@@ -9,12 +9,14 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 class Config(private val employeeDetailsService: EmployeeDetailsService) : WebSecurityConfigurerAdapter() {
 
     @Bean
@@ -41,6 +43,7 @@ class Config(private val employeeDetailsService: EmployeeDetailsService) : WebSe
                 .antMatchers("/companies/{id}/**")
                     .access("hasRole('SUPERUSER')" +
                             " or (hasRole('ADMIN') and principal.getCompanyId().toString() == #id)")
+                .antMatchers("/employees/**").hasAnyRole("SUPERUSER", "ADMIN")
                 .anyRequest().hasRole("SUPERUSER")
             .and().formLogin().permitAll()
             .and().logout().permitAll()
