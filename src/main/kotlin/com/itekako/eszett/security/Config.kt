@@ -9,16 +9,17 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler
+import org.springframework.context.support.beans
 
 @Configuration
 class Config(@Suppress("UNUSED_PARAMETER") @Autowired employeeDetailsService: EmployeeDetailsService)
         : WebSecurityConfigurerAdapter() {
 
-    @Bean
-    fun encoder() = BCryptPasswordEncoder()
 
-    @Bean
-    fun roleHierarchy() = RoleHierarchyImpl().apply { setHierarchy("ROLE_SUPERUSER > ROLE_ADMIN") }
+    val beans = beans {
+        bean<BCryptPasswordEncoder>("encoder")
+        bean("roleHierarchy") { RoleHierarchyImpl().apply { setHierarchy("ROLE_SUPERUSER > ROLE_ADMIN") } }
+    }
 
     override fun configure(http: HttpSecurity) {
         http.authorizeRequests()
