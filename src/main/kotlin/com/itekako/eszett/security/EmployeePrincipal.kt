@@ -5,7 +5,7 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
-class EmployeePrincipal(val employee: Employee) : UserDetails {
+class EmployeePrincipal(private val employee: Employee) : UserDetails {
 
     override fun getUsername() = employee.username?: ""
     override fun getPassword() = employee.password?: ""
