@@ -6,16 +6,13 @@ import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.context.support.beans
 
 @Configuration
 class Config(@Suppress("UNUSED_PARAMETER") private val employeeDetailsService: EmployeeDetailsService)
         : WebSecurityConfigurerAdapter() {
 
-
-    val beans = beans {
-        bean<BCryptPasswordEncoder>("encoder")
-    }
+    @Bean
+    fun encoder() = BCryptPasswordEncoder()
 
     override fun configure(http: HttpSecurity) {
         http.authorizeRequests()
