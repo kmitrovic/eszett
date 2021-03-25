@@ -2,6 +2,8 @@ package com.itekako.eszett.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.itekako.eszett.security.Config
 import javax.persistence.*
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
@@ -45,9 +47,9 @@ class Employee(@SequenceGenerator(name = "employee_id_seq", sequenceName = "empl
                val username: String? = null,
 
                @Column(length = 60)
-               @get: Size(min=6, max=10, message="{password.size}")
                @JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
-               val password: String? = null,
+               @set: JsonDeserialize(using = Config.PasswordDeserializer::class)
+               var password: String? = null,
 
                @JsonIgnore
                @Column

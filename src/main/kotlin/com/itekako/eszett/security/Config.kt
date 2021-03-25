@@ -1,5 +1,9 @@
 package com.itekako.eszett.security
 
+import com.fasterxml.jackson.core.JsonParser
+import com.fasterxml.jackson.databind.DeserializationContext
+import com.fasterxml.jackson.databind.JsonDeserializer
+import com.fasterxml.jackson.databind.JsonNode
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -21,6 +25,14 @@ class Config(private val employeeDetailsService: EmployeeDetailsService) : WebSe
 
     @Bean
     fun passwordEncoder() = BCryptPasswordEncoder()
+
+    class PasswordDeserializer : JsonDeserializer<String>() {
+        override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): String? {
+            val node: JsonNode = p?.codec?.readTree(p) ?: return null
+            return BCryptPasswordEncoder().encode(node.asText())
+        }
+    }
+
 
     override fun configure(http: HttpSecurity) {
         http.authorizeRequests()
