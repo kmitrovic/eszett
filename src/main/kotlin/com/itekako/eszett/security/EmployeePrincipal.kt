@@ -10,7 +10,9 @@ class EmployeePrincipal(private val employee: Employee) : UserDetails {
     override fun getUsername() = employee.username?: ""
     override fun getPassword() = employee.password?: ""
 
-    override fun getAuthorities() = mutableListOf(SimpleGrantedAuthority("ROLE_ADMIN"))
+    override fun getAuthorities() = mutableListOf(SimpleGrantedAuthority(
+        if (employee.isSuperuser) "ROLE_SUPERUSER" else "ROLE_ADMIN"))
+
     override fun isEnabled() = !employee.username.isNullOrBlank() and !employee.password.isNullOrBlank()
 
     override fun isAccountNonExpired() = true

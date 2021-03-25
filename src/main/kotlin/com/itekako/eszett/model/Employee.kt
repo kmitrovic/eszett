@@ -1,5 +1,6 @@
 package com.itekako.eszett.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.*
 import javax.validation.constraints.Email
@@ -47,6 +48,10 @@ class Employee(@SequenceGenerator(name = "employee_id_seq", sequenceName = "empl
                @get: Size(min=6, max=10, message="{password.size}")
                @JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
                val password: String? = null,
+
+               @JsonIgnore
+               @Column
+               val isSuperuser: Boolean = false,
 
                @ManyToOne(optional = false)
                @JoinColumn(name = "company_id", nullable = false)
