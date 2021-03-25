@@ -3,16 +3,24 @@ package com.itekako.eszett.security
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
+import org.springframework.security.authentication.AuthenticationProvider
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
+
 @Configuration
-class Config(@Suppress("UNUSED_PARAMETER") private val employeeDetailsService: EmployeeDetailsService)
-        : WebSecurityConfigurerAdapter() {
+class Config(private val employeeDetailsService: EmployeeDetailsService) : WebSecurityConfigurerAdapter() {
 
     @Bean
-    fun encoder() = BCryptPasswordEncoder()
+    fun daoAuthenticationProvider(): AuthenticationProvider = DaoAuthenticationProvider().apply {
+            setPasswordEncoder(passwordEncoder())
+            setUserDetailsService(employeeDetailsService)
+        }
+
+    @Bean
+    fun passwordEncoder() = BCryptPasswordEncoder()
 
     override fun configure(http: HttpSecurity) {
         http.authorizeRequests()
