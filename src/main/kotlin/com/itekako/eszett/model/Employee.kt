@@ -15,31 +15,31 @@ import javax.validation.constraints.Size
 @Entity
 class Employee(@SequenceGenerator(name = "employee_id_seq", sequenceName = "employee_id_seq", allocationSize = 1)
                @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_id_seq")
-               @Id val id: Long = 0,
+               @Id var id: Long = 0,
 
                @Column(nullable = false, length = 255)
                @get: NotBlank(message="{name.required}")
                @get: Size(max=255, message="{name.long}")
-               val name: String = "",
+               var name: String = "",
 
                @Column(nullable = false, length = 255)
                @get: NotBlank(message="{surname.required}")
                @get: Size(max=255, message="{surname.long}")
-               val surname: String = "",
+               var surname: String = "",
 
                @Column(nullable = false, length = 320)
                @get: NotBlank(message="{email.required}")
                @get: Size(max=320, message="{email.long}")
                @get: Email(message="{email.invalid}")
-               val email: String = "",
+               var email: String = "",
 
                @Column(nullable = false)
                @get: NotNull(message="{salary.required}")
-               val salary: Double,
+               var salary: Double,
 
                @Column(length = 500)
                @get: Size(max=500, message="{address.long}")
-               val address: String = "",
+               var address: String = "",
 
                // Set username and password only for company admins
                @Column(length = 60)
@@ -53,8 +53,8 @@ class Employee(@SequenceGenerator(name = "employee_id_seq", sequenceName = "empl
 
                @JsonIgnore
                @Column
-               val isSuperuser: Boolean = false,
+               var isSuperuser: Boolean = false,
 
                @ManyToOne(optional = false)
                @JoinColumn(name = "company_id", nullable = false)
-               val company: Company)
+               var company: Company)

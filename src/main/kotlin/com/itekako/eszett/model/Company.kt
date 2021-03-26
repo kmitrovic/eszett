@@ -10,11 +10,11 @@ import javax.validation.constraints.NotBlank
 @Entity
 class Company(@SequenceGenerator(name = "company_id_seq", sequenceName = "company_id_seq", allocationSize = 1)
               @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "company_id_seq")
-              @Id val id: Long = 0,
+              @Id var id: Long = 0,
 
               @Column(unique = true, nullable = false, length = 500)
               @get: NotBlank(message="{name.required}")
-              val name: String = "",
+              var name: String = "",
 
               @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = [ CascadeType.ALL ],
                          orphanRemoval = true)
