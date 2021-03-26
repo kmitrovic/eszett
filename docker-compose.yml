@@ -1,8 +1,8 @@
-version: '2'
+version: '3'
 
 services:
   eszett:
-    image: 'docker-spring-boot-postgres:latest'
+    image: 'kmitrovicitk/eszett:latest'
     build:
       context: .
     container_name: eszett
