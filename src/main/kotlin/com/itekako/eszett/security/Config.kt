@@ -40,10 +40,13 @@ class Config(private val employeeDetailsService: EmployeeDetailsService) : WebSe
         http.authorizeRequests()
                 // only a superuser can delete a company, and it can delete any company (even his own!)
                 .antMatchers(HttpMethod.DELETE,"/companies/*").hasRole("SUPERUSER")
-                .antMatchers("/employees/*/company/**").hasAnyRole("SUPERUSER")
+                .antMatchers("/companies", "/companies/").hasAnyRole("SUPERUSER", "ADMIN")
                 .antMatchers("/companies/{id}/**")
                     .access("hasRole('SUPERUSER')" +
                             " or (hasRole('ADMIN') and principal.getCompanyId().toString() == #id)")
+
+                .antMatchers("/employees/{id}/company/**").hasRole("SUPERUSER")
+                .antMatchers(HttpMethod.GET,"/employees/{id}/**").hasRole("SUPERUSER")
                 .antMatchers("/employees/**").hasAnyRole("SUPERUSER", "ADMIN")
                 .anyRequest().hasRole("SUPERUSER")
             .and().formLogin().permitAll()

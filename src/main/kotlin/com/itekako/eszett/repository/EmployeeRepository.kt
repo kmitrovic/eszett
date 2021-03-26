@@ -6,7 +6,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource
 import org.springframework.data.rest.core.annotation.RestResource
 import org.springframework.security.access.prepost.PostFilter
 import org.springframework.security.access.prepost.PreAuthorize
-import java.util.*
 
 @RepositoryRestResource
 interface EmployeeRepository : CrudRepository<Employee, Long> {
@@ -16,9 +15,6 @@ interface EmployeeRepository : CrudRepository<Employee, Long> {
 
     @PreAuthorize("hasRole('SUPERUSER') or #entity.company.id == principal.getCompanyId()")
     override fun <S : Employee?> save(entity: S): S
-
-    @PostFilter("hasRole('SUPERUSER') or filterObject.company.id == principal.getCompanyId()")
-    override fun findById(id: Long): Optional<Employee>
 
     @PostFilter("hasRole('SUPERUSER') or filterObject.company.id == principal.getCompanyId()")
     override fun findAll(): MutableIterable<Employee>
