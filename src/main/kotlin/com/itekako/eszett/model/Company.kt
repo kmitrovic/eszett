@@ -1,5 +1,6 @@
 package com.itekako.eszett.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.*
 import javax.validation.constraints.NotBlank
@@ -16,6 +17,7 @@ class Company(@SequenceGenerator(name = "company_id_seq", sequenceName = "compan
               @get: NotBlank(message="{name.required}")
               var name: String = "",
 
+              @JsonIgnore
               @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = [ CascadeType.ALL ],
                          orphanRemoval = true)
               var employees: MutableSet<Employee> = HashSet()) {
