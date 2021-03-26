@@ -48,6 +48,8 @@ class Config(private val employeeDetailsService: EmployeeDetailsService) : WebSe
                 .antMatchers("/employees/{id}/company/**").hasRole("SUPERUSER")
                 .antMatchers(HttpMethod.GET,"/employees/{id}/**").hasRole("SUPERUSER")
                 .antMatchers("/employees/**").hasAnyRole("SUPERUSER", "ADMIN")
+                // TODO better let only superuser to explorer, but only once the FE is built for admin users
+                .antMatchers("/", "/explorer/**").hasAnyRole("SUPERUSER", "ADMIN")
                 .anyRequest().hasRole("SUPERUSER")
             .and().formLogin().permitAll()
             .and().logout().permitAll()
