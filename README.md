@@ -10,6 +10,9 @@ Check the default UI at http://127.0.0.1:8080/ on your machine.
 Stop composer by interrupting it with Ctrl+c, and then execute:
 `make down`
 
+Note that the project cannot be run directly (i.e. using only ./gradlew) as it doesn't contain any DB connection
+parameters outside of docker.
+
 # Initial data
 Check src/main/resources/db/migration/V2021.03.26.22.41.00__Add_initial_dummy_data.sql
 
