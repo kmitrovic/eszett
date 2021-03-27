@@ -1,0 +1,3 @@
+spring:
+  application.name: Eszett-tests
+  datasource.url: jdbc:tc:postgresql:12:///eszett_tests_db
