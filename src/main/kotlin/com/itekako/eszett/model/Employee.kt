@@ -44,7 +44,7 @@ class Employee(@SequenceGenerator(name = "employee_id_seq", sequenceName = "empl
                // Set username and password only for company admins
                @Column(length = 60)
                @get: Size(max=60, message="{username.long}")
-               val username: String? = null,
+               var username: String? = null,
 
                @Column(length = 60)
                @JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
