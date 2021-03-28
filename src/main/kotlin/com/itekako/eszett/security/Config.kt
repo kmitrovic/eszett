@@ -38,6 +38,8 @@ class Config(private val employeeDetailsService: EmployeeDetailsService) : WebSe
 
     override fun configure(http: HttpSecurity) {
         http.authorizeRequests()
+                .antMatchers(HttpMethod.PUT,"/companies/**").denyAll()
+                .antMatchers(HttpMethod.PUT,"/employees/**").denyAll()
                 // only a superuser can delete a company, and it can delete any company (even his own!)
                 .antMatchers(HttpMethod.DELETE,"/companies/*").hasRole("SUPERUSER")
                 .antMatchers(HttpMethod.GET, "/companies", "/companies/").hasAnyRole("SUPERUSER", "ADMIN")

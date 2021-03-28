@@ -24,22 +24,25 @@ in users.
 
 | API Endpoint | superuser | admin |
 | :---: | :---: | :---: |
+||||
 | `GET /companies` | list all companies | list with only user's company |
 | `POST /companies` | create a new company | - |
 | `GET /companies/{id}` | details about the company | works only for user's company ID |
-| `PUT /companies/{id}` | replace or create company | works only for user's company ID |
 | `PATCH /companies/{id}` | update company | works only for user's company ID |
 | `DELETE /companies/{id}` | delete company | - |
-| --- | --- | --- |
+||||
 | `GET /employees` | list all employees | list employees only within user's company |
 | `POST /employees` | create a new employee | works only within user's company |
 | `GET /employees/{id}` | details about the employee | -<sup>*</sup> |
-| `PUT /employees/{id}` | replace or create employee | works only within user's company |
 | `PATCH /employees/{id}` | update employee | works only within user's company |
 | `DELETE /employees/{id}` | delete employee | works only within user's company |
-| --- | --- | --- |
+||||
 | `/companies/{id}/employees/**` | company's related employees' endpoints | works only within user's company |
 | `/employees/{id}/company/**` | employee's related company's endpoints | - |
+||||
+| `PUT /companies/**` | - | - |
+| `PUT /employees/**` | - | - |
+
 
 <sup>*</sup>Forbidden for security. Instead, please use `GET /companies/{c_id}/employees/{e_id}` call.
 
