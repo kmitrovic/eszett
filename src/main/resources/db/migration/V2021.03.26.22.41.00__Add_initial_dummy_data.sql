@@ -5,7 +5,7 @@ INSERT INTO company (id, name) VALUES
 
 INSERT INTO employee (id, username, password, name, surname, email, salary, address, company_id, is_superuser) VALUES
   -- Company EBF (2 regular users):
-  (nextval('employee_id_seq'), NULL, NULL,
+  (nextval('employee_id_seq'), 'john', '$2y$12$oh40NxvuuyH7qNj/k4yT5ebZuXOBRzaEgbaxCyRp4866ajTteSULi',  -- pass: john01
     'John', 'Doe', 'john@example.com', 1500, NULL, (SELECT id FROM company WHERE name = 'EBF'), FALSE),
   (nextval('employee_id_seq'), NULL, NULL,
     'Jane', 'Doe', 'jane@example.com', 777.77, NULL, (SELECT id FROM company WHERE name = 'EBF'), FALSE),
