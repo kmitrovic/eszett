@@ -19,12 +19,13 @@ interface EmployeeRepository : CrudRepository<Employee, Long> {
     @Query("SELECT e.company.id FROM Employee e WHERE e.id = :id")
     fun findCompanyIdById(@Param("id") id: Long): Long?
 
+
+    @PostFilter("hasPermission(filterObject, 'findAll')")
+    override fun findAll(): MutableIterable<Employee>
+
     @PreAuthorize("hasPermission(#entity, 'save')")
     override fun <S : Employee?> save(entity: S): S
 
-    @PostFilter("hasRole('SUPERUSER') or filterObject.company.id == principal.getCompanyId()")
-    override fun findAll(): MutableIterable<Employee>
-
-    @PreAuthorize("hasRole('SUPERUSER') or #entity.company.id == principal.getCompanyId()")
+    @PreAuthorize("hasPermission(#entity, 'delete')")
     override fun delete(entity: Employee)
 }
