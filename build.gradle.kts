@@ -45,9 +45,9 @@ dependencies {
 	testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test")
-	testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.1")
 	testImplementation("org.testcontainers:postgresql:1.10.6")
-	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.1")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
 }
 
 tasks.withType<KotlinCompile> {
