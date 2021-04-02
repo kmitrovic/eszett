@@ -6,5 +6,4 @@ down:
 	docker-compose down
 
 test:
-	docker pull quay.io/testcontainers/ryuk:0.2.2
 	./gradlew test

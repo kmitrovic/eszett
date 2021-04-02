@@ -1,6 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.bmuschko.gradle.docker.tasks.image.DockerPullImage
 
 plugins {
+	id("com.bmuschko.docker-remote-api") version "6.7.0"
 	id("org.springframework.boot") version "2.4.4"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
 	id("org.asciidoctor.convert") version "1.5.8"
@@ -50,22 +52,29 @@ dependencies {
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
 }
 
-tasks.withType<KotlinCompile> {
-	kotlinOptions {
-		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "11"
+tasks {
+	withType<KotlinCompile> {
+		kotlinOptions {
+			freeCompilerArgs = listOf("-Xjsr305=strict")
+			jvmTarget = "11"
+		}
 	}
-}
 
-tasks.withType<Test> {
-	useJUnitPlatform()
-}
+	val pull_ryuk by registering(DockerPullImage::class) {
+		image.set("quay.io/testcontainers/ryuk:0.2.2")
+	}
 
-tasks.test {
-	outputs.dir(project.property("snippetsDir"))
-}
+	withType<Test> {
+		dependsOn(pull_ryuk)
+		useJUnitPlatform()
+	}
 
-tasks.asciidoctor {
-	inputs.dir(project.property("snippetsDir"))
-	dependsOn(tasks.test)
+	test {
+		outputs.dir(project.property("snippetsDir"))
+	}
+
+	asciidoctor {
+		inputs.dir(project.property("snippetsDir"))
+		dependsOn(test)
+	}
 }
