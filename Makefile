@@ -1,9 +1,8 @@
 run:
-	./gradlew clean build -x test
-	docker-compose up --build
+	./gradlew clean build composeUp -x test
 
 down:
-	docker-compose down
+	./gradlew composeDown
 
 test:
 	./gradlew test

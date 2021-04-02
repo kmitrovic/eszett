@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.bmuschko.gradle.docker.tasks.image.DockerPullImage
 
 plugins {
+	id("com.avast.gradle.docker-compose") version "0.14.2"
 	id("com.bmuschko.docker-remote-api") version "6.7.0"
 	id("org.springframework.boot") version "2.4.4"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
@@ -53,6 +54,7 @@ dependencies {
 }
 
 tasks {
+
 	withType<KotlinCompile> {
 		kotlinOptions {
 			freeCompilerArgs = listOf("-Xjsr305=strict")

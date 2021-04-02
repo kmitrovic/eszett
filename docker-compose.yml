@@ -1,11 +1,10 @@
-version: '3'
+version: '3.9'
 
 services:
   eszett:
     image: 'kmitrovicitk/eszett:latest'
     build:
       context: .
-    container_name: eszett
     depends_on:
       - db
     environment:
@@ -17,7 +16,6 @@ services:
 
   db:
     image: 'postgres:13.1-alpine'
-    container_name: db
     environment:
       - POSTGRES_DB=eszett_db
       - POSTGRES_USER=eszett
